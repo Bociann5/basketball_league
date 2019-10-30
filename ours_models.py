@@ -14,8 +14,6 @@ class Game(models.Model):
         db_table = 'Game'
 
 
-class HistoryOfInjury(models.Model):
-    player_idplayer = models.ForeignKey('Player', models.DO_NOTHING, db_column='Player_idPlayer', primary_key=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
