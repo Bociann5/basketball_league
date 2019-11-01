@@ -1,11 +1,11 @@
 import os, django
 
-from django.contrib.auth.models import User
-from league.models import Person
 from faker import Faker
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "basketball_league.settings")
 django.setup()
+from django.contrib.auth.models import User
+from league.models import Person
 
 fake = Faker()
 
