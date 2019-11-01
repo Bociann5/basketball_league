@@ -1,15 +1,12 @@
-import os, django
+
+from .set_up_django_for_generators import set_up_django
 import time, random
-
-from faker import Faker, Factory
+from faker import Factory
 from faker.providers import internet
-
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "basketball_league.settings")
-django.setup()
 from django.contrib.auth.models import User
-from django.db.utils import IntegrityError
 from ..league.models import Person
 
+set_up_django()
 fake = Factory.create()
 fake.add_provider(internet)
 
@@ -41,16 +38,8 @@ def create_users(nth):
                  email=email, first_name=first_name,
                  last_name=last_name)
 
-        # for user in list_of_users:
-        #     if user.username == u.username:
-        #         print('DUPLICATE')
-        #         print(u.username)
-        #         u.username = get_username()
-        #         print(u.username)
-
         list_of_users.append(u)
 
-        # list_of_users.append(u)
     print('Created all list')
     User.objects.bulk_create(list_of_users)
 
