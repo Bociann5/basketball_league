@@ -8,7 +8,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "basketball_league.settings")
 django.setup()
 from django.contrib.auth.models import User
 from django.db.utils import IntegrityError
-from league.models import Person
+from ..league.models import Person
 
 fake = Factory.create()
 fake.add_provider(internet)
