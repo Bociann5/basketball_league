@@ -25,7 +25,7 @@ SECRET_KEY = 't(bwx_#&6o75t$ui=lb0fbllj$dyfz#ffp*@sagxyv!(cm*wx%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['remotemysql.com']
 
 
 # Application definition
@@ -77,10 +77,10 @@ WSGI_APPLICATION = 'basketball_league.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'basketball_league',
-	'USER': 'admin',
-	'PASSWORD': 'Konrad!23',
-	'HOST': '127.0.0.1'
+        'NAME': 'hGPetmRbFz',
+        'USER': 'hGPetmRbFz',
+        'PASSWORD': 'SEcBtYbLzf',
+        'HOST': 'remotemysql.com'
     }
 }
 

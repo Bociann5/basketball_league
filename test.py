@@ -22,5 +22,3 @@ def test():
     print(f'{(time.time() - start) / 60} seconds.')
 
 fake.add_provider(internet)
-
-print(fake.user_name())
