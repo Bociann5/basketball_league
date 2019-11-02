@@ -13,7 +13,7 @@ def create_players():
         weight = random.randrange(70,130)
         age = random.randrange(18,41)
         position = random.choice(positions)
-        is_active = random.randrange(0,1)
+        is_active = True
         player = Player.objects.create(person=person, height=height,
                                         weight=weight, age=age,
                                         position=position, is_active=is_active)

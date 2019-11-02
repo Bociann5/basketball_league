@@ -31,19 +31,17 @@ class Person(models.Model):
 
 
 class Role(models.Model):
-    # TODO change for booleans
-    is_admin = models.CharField(max_length=45, blank=True, null=True)
-    is_menager = models.CharField(max_length=45, blank=True, null=True)
-    is_player = models.CharField(max_length=45, blank=True, null=True)
+    is_admin = models.BooleanField(blank=True, null=True)
+    is_menager = models.BooleanField(blank=True, null=True)
+    is_player = models.BooleanField(blank=True, null=True)
     person = models.ForeignKey(Person, related_name='roles', on_delete=models.CASCADE)
 
-#TODO change is_active from int to boolean
 class Player(models.Model):
     height = models.IntegerField(blank=True, null=True)
     weight = models.IntegerField(blank=True, null=True)
     age = models.IntegerField(blank=True, null=True)
     position = models.CharField(max_length=45, blank=True, null=True)
-    is_active = models.IntegerField(blank=True, null=True)
+    is_active = models.BooleanField(null=True)
     person = models.ForeignKey(Person, related_name='players', on_delete=models.CASCADE)
 
     def __str__(self):

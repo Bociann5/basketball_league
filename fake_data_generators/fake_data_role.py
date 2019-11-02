@@ -9,9 +9,9 @@ fake = Factory.create()
 # # TODO change fields in Role Model for BooleanField
 def create_roles():
     list_of_roles = []
-    IS_ADMIN = 'True'
-    IS_MANAGER = 'True'
-    IS_PLAYER = 'True'
+    IS_ADMIN = True
+    IS_MANAGER = True
+    IS_PLAYER = True
 
     for person in Person.objects.all():
         r = Role(is_player=IS_PLAYER, person=person)
