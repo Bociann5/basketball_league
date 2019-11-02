@@ -1,11 +1,7 @@
-import os, django
-import random, time
+import set_up_django_for_generators
+set_up_django_for_generators.set_up_django()
 
-from faker import Faker
-
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "basketball_league.settings")
-django.setup()
- 
+import random
 from league.models import Player, PlayerStatistic
 
 

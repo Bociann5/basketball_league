@@ -1,9 +1,7 @@
-import os, django
-import random, time
+import set_up_django_for_generators
+set_up_django_for_generators.set_up_django()
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "basketball_league.settings")
-django.setup()
- 
+import random, time
 from league.models import Person, Player
 
 positions = ['point_guard', 'shooting_guard', 'small_forward', 'power_forward', 'center']
