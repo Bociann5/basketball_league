@@ -11,7 +11,7 @@ log.log
 .nyc_output
 .vscode-test
 __pycache__/
-**/basketball_league/settings.py
+.basketball_league/settings.py
 
 
 npm-debug.log
