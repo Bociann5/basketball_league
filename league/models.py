@@ -37,7 +37,7 @@ class Role(models.Model):
     is_player = models.CharField(max_length=45, blank=True, null=True)
     person = models.ForeignKey(Person, related_name='roles', on_delete=models.CASCADE)
 
-
+#TODO change is_active from int to boolean
 class Player(models.Model):
     height = models.IntegerField(blank=True, null=True)
     weight = models.IntegerField(blank=True, null=True)
@@ -47,7 +47,7 @@ class Player(models.Model):
     person = models.ForeignKey(Person, related_name='players', on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.person
+        return self.person.last_name
 
 
 class PlayerStatistic(models.Model):
@@ -55,6 +55,9 @@ class PlayerStatistic(models.Model):
     points = models.IntegerField(blank=True, null=True)
     rebounds = models.IntegerField(blank=True, null=True)
     assists = models.IntegerField(blank=True, null=True)
+
+    def __str__(self):
+        return self.player.person.last_name
 
 
 class PlayerLicense(models.Model):
@@ -98,3 +101,5 @@ class HistoryOfInjury(models.Model):
     player = models.ForeignKey(Player, related_name='histories_of_injuries', on_delete=models.CASCADE)
     injuries = models.ManyToManyField(Injury, related_name='histories_of_injuries')
 
+if __name__ == '__main__':
+    main()
