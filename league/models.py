@@ -3,17 +3,20 @@ from django.contrib.auth.models import User
 
 
 class Game(models.Model):
-    winner = models.CharField(max_length=45, blank=True, null=True)
-    loser = models.CharField(max_length=45, blank=True, null=True)
-    guest = models.CharField(max_length=45, blank=True, null=True)
-    host = models.CharField(max_length=45, blank=True, null=True)
-    date_match = models.CharField(max_length=45, blank=True, null=True)
-    score_guest = models.CharField(max_length=45, blank=True, null=True)
-    score_host = models.CharField(max_length=45, blank=True, null=True)
-    final_score = models.CharField(max_length=45, blank=True, null=True)
+    winner = models.CharField(max_length=150, blank=True, null=True)
+    loser = models.CharField(max_length=150, blank=True, null=True)
+    guest = models.CharField(max_length=150, blank=True, null=True)
+    host = models.CharField(max_length=150, blank=True, null=True)
+    date_match = models.CharField(max_length=100, blank=True, null=True)
+    score_guest = models.CharField(max_length=10, blank=True, null=True)
+    score_host = models.CharField(max_length=10, blank=True, null=True)
+    final_score = models.CharField(max_length=10, blank=True, null=True)
 
     def __str__(self):
         return f'{self.guest} - {self.host}'
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
 
 
 class Schedule(models.Model):
@@ -32,7 +35,7 @@ class Person(models.Model):
 
 class Role(models.Model):
     is_admin = models.BooleanField(blank=True, null=True)
-    is_menager = models.BooleanField(blank=True, null=True)
+    is_manager = models.BooleanField(blank=True, null=True)
     is_player = models.BooleanField(blank=True, null=True)
     person = models.ForeignKey(Person, related_name='roles', on_delete=models.CASCADE)
 
@@ -66,7 +69,7 @@ class PlayerLicense(models.Model):
 class Team(models.Model):
     players = models.ManyToManyField(Player, related_name='teams')
     games = models.ManyToManyField(Game, related_name='teams')
-    name = models.CharField(max_length=45, blank=True, null=True)
+    name = models.CharField(max_length=150, blank=True, null=True)
     amount_of_wins = models.IntegerField(blank=True, null=True)
     amount_of_losses = models.IntegerField(blank=True, null=True)
     records = models.CharField(max_length=45, blank=True, null=True)
@@ -79,7 +82,7 @@ class Team(models.Model):
 class TeamDetails(models.Model):
     home_color = models.CharField(max_length=45, blank=True, null=True)
     away_color = models.CharField(max_length=45, blank=True, null=True)
-    arena_address = models.CharField(max_length=45, blank=True, null=True)
+    arena_address = models.CharField(max_length=225, blank=True, null=True)
     team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='team_details')
 
 
