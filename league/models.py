@@ -20,6 +20,7 @@ class Game(models.Model):
 
 
 class Schedule(models.Model):
+    year = models.CharField(max_length=30, blank=True, null=True)
     games = models.ManyToManyField(Game, related_name='schedules')
 
 
