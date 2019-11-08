@@ -6,14 +6,15 @@ from league.models import Player, PlayerStatistic
 
 
 def create_players_statistic():
-    players = Player.objects.all()[:10]
+    players = Player.objects.all()
+    count = 1
     for player in players:
         points = random.randrange(0,50)
         rebounds = random.randrange(0,25)
         assists = random.randrange(0,25)
-        player_statistic = PlayerStatistic.objects.create(player = player, points=points, 
+        PlayerStatistic.objects.create(player = player, points=points,
                                             rebounds=rebounds, assists=assists)
-        player_statistic.save()
         print(count)
+        count += 1
 
 create_players_statistic()
