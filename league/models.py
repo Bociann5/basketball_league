@@ -102,6 +102,3 @@ class Injury(models.Model):
 class HistoryOfInjury(models.Model):
     player = models.ForeignKey(Player, related_name='histories_of_injuries', on_delete=models.CASCADE)
     injuries = models.ManyToManyField(Injury, related_name='histories_of_injuries')
-
-if __name__ == '__main__':
-    main()
