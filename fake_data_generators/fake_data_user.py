@@ -1,15 +1,15 @@
-
 import set_up_django_for_generators
 set_up_django_for_generators.set_up_django()
 
 import time, random
-from faker import Factory
+from faker import Faker
 from faker.providers import internet
 from django.contrib.auth.models import User
-from league.models import Person
+
+import fake_data_game as game_const
 
 
-fake = Factory.create()
+fake = Faker()
 fake.add_provider(internet)
 
 
@@ -45,17 +45,7 @@ def create_users(nth):
     print('Created all list')
     User.objects.bulk_create(list_of_users)
 
-def create_persons():
-    users = User.objects.all()
-    for user in users:
-        birthday_date = fake.profile(fields=['birthdate'])['birthdate']
-        u = User.objects.get(id=user.pk)
-        person = Person.objects.create(user=user, first_name=user.first_name,
-                                       last_name=user.last_name, birthday_date=birthday_date)
-        person.save()
-
 start = time.time()
 print('Start', start)
-create_users(4800)
-create_persons()
+create_users(game_const.NUMBER_OF_ALL_TEAMS * game_const.MAX_NUMBER_PLAYERS_IN_TEAM)
 print(f'End! It takes {time.time() - start} seconds')

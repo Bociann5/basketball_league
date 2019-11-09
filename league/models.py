@@ -13,7 +13,7 @@ class Game(models.Model):
     final_score = models.CharField(max_length=10, blank=True, null=True)
 
     def __str__(self):
-        return f'{self.guest} - {self.host}'
+        return f'{self.host} - {self.guest}'
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -28,7 +28,7 @@ class Person(models.Model):
     user = models.ForeignKey(User, related_name='persons', on_delete=models.CASCADE)
     first_name = models.CharField(max_length=45, blank=True, null=True)
     last_name = models.CharField(max_length=45, blank=True, null=True)
-    birthday_date = models.DateField(blank=True, null=True)  
+    birthday_date = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return self.last_name

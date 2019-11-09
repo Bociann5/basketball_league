@@ -11,11 +11,13 @@ worlds_geo = ['N', 'E', 'W', 'S']
 list_teams_names = []
 fake = Faker()
 
+NUMBER_OF_ALL_TEAMS = 230
+MAX_NUMBER_PLAYERS_IN_TEAM = 15
 
 # 1
 def create_teams():
     counter = 1
-    while (Team.objects.all().count() < 330):
+    while (Team.objects.all().count() < NUMBER_OF_ALL_TEAMS):
         for el in list_of_countries:
             name = ''
             if el[1] % 3 == 0:
@@ -29,7 +31,7 @@ def create_teams():
             Team.objects.create(name=name)
             print('Created! ', counter)
             counter += 1
-            if Team.objects.all().count() == 330:
+            if Team.objects.all().count() == NUMBER_OF_ALL_TEAMS:
                 break
 
 
@@ -44,10 +46,10 @@ def add_players_to_teams():
         players_in_team = []
         for player in Player.objects.all()[start_from::]:
             players_in_team.append(player)
-            if len(players_in_team) == 15:
+            if len(players_in_team) == MAX_NUMBER_PLAYERS_IN_TEAM:
                 team.players.set(players_in_team)
                 team.save()
-                start_from += 15
+                start_from += MAX_NUMBER_PLAYERS_IN_TEAM
                 players_in_team = []
                 break
 
@@ -62,10 +64,16 @@ def create_games():
             if not team == opponent:
                 Game.objects.create(host=team, guest=opponent)
 
+def assignee_teams_to_games():
+    for game in Game.objects.all():
+        game.teams.set(Team.objects.filter(name__in=[game.host, game.guest]))
+
+
 
 start = time.time()
 print('Start', start)
 # create_teams()
 # add_players_to_teams()
-create_games()
+# create_games()
+assignee_teams_to_games()
 print(f'End! It takes {time.time() - start} seconds')
