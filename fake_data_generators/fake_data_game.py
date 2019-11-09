@@ -7,7 +7,7 @@ from faker import Faker
 from league.models import Game, Team, Player
 
 list_of_countries = [(country.name, int(country.numeric)) for country in pycountry.countries]
-worlds_geo = ['N', 'E', 'W', 'S']
+worlds_geo = ['North', 'East', 'West', 'South']
 list_teams_names = []
 fake = Faker()
 
@@ -34,8 +34,6 @@ def create_teams():
             if Team.objects.all().count() == NUMBER_OF_ALL_TEAMS:
                 break
 
-
-
 # 2
 def add_players_to_teams():
     start_from = 0
@@ -56,7 +54,6 @@ def add_players_to_teams():
         if not all_players > start_from:
             break
 
-
 def create_games():
     all_teams = Team.objects.all().values_list('name', flat=True)
     for team in all_teams:
@@ -69,11 +66,10 @@ def assignee_teams_to_games():
         game.teams.set(Team.objects.filter(name__in=[game.host, game.guest]))
 
 
-
 start = time.time()
 print('Start', start)
 # create_teams()
 # add_players_to_teams()
 # create_games()
-assignee_teams_to_games()
+# assignee_teams_to_games()
 print(f'End! It takes {time.time() - start} seconds')
