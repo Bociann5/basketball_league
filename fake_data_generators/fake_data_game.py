@@ -56,14 +56,18 @@ def add_players_to_teams():
 
 def create_games():
     all_teams = Team.objects.all().values_list('name', flat=True)
+    games_list = []
     for team in all_teams:
         for opponent in all_teams:
             if not team == opponent:
-                Game.objects.create(host=team, guest=opponent)
+                games_list.append(Game(host=team, guest=opponent))
+    Game.objects.bulk_create(games_list)
 
 def assignee_teams_to_games():
-    for game in Game.objects.all():
-        game.teams.set(Team.objects.filter(name__in=[game.host, game.guest]))
+    teams_names = Team.objects.all()
+    games = Game.objects.all().iterator()
+    for game in games:
+        game.teams.set(teams_names.filter(name__in=[game.host, game.guest]))
 
 
 start = time.time()
@@ -71,5 +75,5 @@ print('Start', start)
 # create_teams()
 # add_players_to_teams()
 # create_games()
-# assignee_teams_to_games()
+assignee_teams_to_games()
 print(f'End! It takes {time.time() - start} seconds')
