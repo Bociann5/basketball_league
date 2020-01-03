@@ -9,16 +9,24 @@ positions = ['point_guard', 'shooting_guard', 'small_forward', 'power_forward', 
 def create_players():
     persons = Person.objects.all()
     players_list =[]
+    fake_license_number = 1
     for person in persons:
         height = random.randrange(155,220)
         weight = random.randrange(70,130)
         age = random.randrange(18,41)
         position = random.choice(positions)
         is_active = True
-        player = Player(person=person, height=height,
-                              weight=weight, age=age,
-                              position=position, is_active=is_active)
-
+        license_number = fake_license_number
+        player = Player(
+            person=person,
+            height=height,
+            weight=weight,
+            age=age,
+            position=position,
+            is_active=is_active,
+            license_number=license_number
+        )
+        fake_license_number += 1
         players_list.append(player)
     Player.objects.bulk_create(players_list)
 

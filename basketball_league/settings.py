@@ -25,7 +25,7 @@ SECRET_KEY = 't(bwx_#&6o75t$ui=lb0fbllj$dyfz#ffp*@sagxyv!(cm*wx%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['remotemysql.com']
+ALLOWED_HOSTS = ['remotemysql.com', '127.0.0.1']
 
 
 # Application definition

@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 class Game(models.Model):
     winner = models.CharField(max_length=150, blank=True, null=True)
     loser = models.CharField(max_length=150, blank=True, null=True)
-    guest = models.CharField(max_length=150, blank=True, null=True)
-    host = models.CharField(max_length=150, blank=True, null=True)
+    guest = models.ForeignKey('Team', related_name='game_guest', on_delete=models.CASCADE)
+    host = models.ForeignKey('Team', related_name='game_host', on_delete=models.CASCADE)
     date_match = models.CharField(max_length=100, blank=True, null=True)
     score_guest = models.CharField(max_length=10, blank=True, null=True)
     score_host = models.CharField(max_length=10, blank=True, null=True)
@@ -47,6 +47,7 @@ class Player(models.Model):
     position = models.CharField(max_length=45, blank=True, null=True)
     is_active = models.BooleanField(null=True)
     person = models.ForeignKey(Person, related_name='players', on_delete=models.CASCADE)
+    license_number = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return self.person.last_name
@@ -60,11 +61,6 @@ class PlayerStatistic(models.Model):
 
     def __str__(self):
         return self.player.person.last_name
-
-
-class PlayerLicense(models.Model):
-    player = models.ForeignKey(Player, related_name='player_licences', on_delete=models.CASCADE)
-    license_number = models.IntegerField(blank=True, null=True)
 
 
 class Team(models.Model):

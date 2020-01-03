@@ -55,7 +55,7 @@ def add_players_to_teams():
             break
 
 def create_games():
-    all_teams = Team.objects.all().values_list('name', flat=True)
+    all_teams = Team.objects.all()
     games_list = []
     for team in all_teams:
         for opponent in all_teams:
@@ -74,6 +74,6 @@ start = time.time()
 print('Start', start)
 # create_teams()
 # add_players_to_teams()
-# create_games()
-assignee_teams_to_games()
+create_games()
+# assignee_teams_to_games()
 print(f'End! It takes {time.time() - start} seconds')
