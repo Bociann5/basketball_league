@@ -22,6 +22,13 @@ class Game(models.Model):
 class Schedule(models.Model):
     year = models.CharField(max_length=30, blank=True, null=True)
     games = models.ManyToManyField(Game, related_name='schedules')
+    teams = models.ManyToManyField('Team', related_name='schedules')
+    champions = models.ForeignKey(
+        'Team',
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True
+    )
 
 
 class Person(models.Model):
@@ -64,13 +71,20 @@ class PlayerStatistic(models.Model):
 
 
 class Team(models.Model):
-    players = models.ManyToManyField(Player, related_name='teams')
-    games = models.ManyToManyField(Game, related_name='teams')
+    players = models.ManyToManyField(
+        Player,
+        related_name='teams'
+    )
+    games = models.ManyToManyField(
+        Game,
+        related_name='teams'
+    )
     name = models.CharField(max_length=150, blank=True, null=True)
     amount_of_wins = models.IntegerField(blank=True, null=True)
     amount_of_losses = models.IntegerField(blank=True, null=True)
     records = models.CharField(max_length=45, blank=True, null=True)
     founding_date = models.DateField(blank=True, null=True)
+    # years_of_championships = models.
 
     def __str__(self):
         return self.name
